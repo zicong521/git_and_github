@@ -137,26 +137,21 @@ void recursion_judge(char *s, char *p ,int *flag)
     }
     if(*(p+1) != '*')//如果p的下一位是字符 直接比较
     {
-        if (*s == *p)
+        if (*s == *p || *p == '.')
         {
             recursion_judge(s+1,p+1,flag);
         }
-        else
+        else 
         {
             *flag = false;
             return ;
         }
-        
     }
     else //
     {
-        if (*s == *p && *p != *(p+2))//考虑到前面 *匹配为0的情况
+        if (*s == *p || *p == '.')
         {
             recursion_judge(s+1,p,flag);
-        }
-        else if(*s == *p && *p == *(p+2))//排除掉干扰
-        {
-            recursion_judge(s,p+2,flag);
         }
         else
         {
@@ -167,5 +162,14 @@ void recursion_judge(char *s, char *p ,int *flag)
 }
 bool is_match_4(char *s,char *p)
 {
-    return true;
+    int flag = true;
+    recursion_judge(s,p,&flag);
+    if(flag)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
