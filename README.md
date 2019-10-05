@@ -42,8 +42,4 @@ bool is_match_4(char *s,char *p);//两种符号都存在
 输入 s=sddd p=s*sddd
 输出 0 //bug
 ```
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 6e5fa539c438f6061fb577eb651957b31fbc0509
