@@ -17,8 +17,8 @@ bool is_match_3(char *s,char *p);// 其他情况
 void recursion_judge(char *s, char *p ,int *flag);//针对情况三的递归判断函数
 void recursion_judge_reverse(char *s, char *p ,int *flag);//倒置递归判断函数
 
-void *reverse(char *s);//字符串翻转函数 
-                               //避免递归操作中s=ssfff  p=s*ssfff这种情况下的bug
+void reverse(char *s);//字符串翻转函数 
+                               
 
 int main(void)
 {
@@ -63,8 +63,6 @@ bool is_match(char *s , char *p )
         }
         else 
         {
-            //这里加一个字符串逆转函数 
-            reverse(s),reverse(p);
             return is_match_3(s,p);
         }
         
@@ -94,10 +92,12 @@ bool is_match_2(char *s,char *p)//只有 '.' 存在
 }
 bool is_match_3(char *s,char *p)//其他情况
 {
-    int flag = true;
-    recursion_judge(s,p,&flag);
-    recursion_judge_reverse(s,p,&flag);
-    if(flag)
+    int flag1 = true,flag2 = true;
+    recursion_judge(s,p,&flag1);
+     //这里加一个字符串逆转函数 
+    reverse(s),reverse(p);
+    recursion_judge_reverse(s,p,&flag2);
+    if(flag1 || flag2)
     {
         return true;
     }
@@ -139,7 +139,7 @@ void recursion_judge_reverse(char *s, char *p ,int *flag)//倒置字符串 迭�
     {
         if (*s == *p || *p == '.')
         {
-            recursion_judge(s+1,p+1,flag);
+            recursion_judge_reverse(s+1,p+1,flag);
         }
         else 
         {
@@ -151,11 +151,11 @@ void recursion_judge_reverse(char *s, char *p ,int *flag)//倒置字符串 迭�
     {
         if (*(p+1) == *s  || *(p+1) == '.')
         {
-            recursion_judge(s+1,p,flag);
+            recursion_judge_reverse(s+1,p,flag);
         }
         else
         {
-            recursion_judge(s,p+2,flag);
+            recursion_judge_reverse(s,p+2,flag);
         }
         
     }
@@ -166,7 +166,7 @@ void recursion_judge(char *s, char *p ,int *flag)//正置判断
     {
         if( *s == '\0')
         {
-            while(*p =='*')
+            while(*(p+1) =='*')
             {
                 p +=2;
             }
@@ -210,10 +210,9 @@ void recursion_judge(char *s, char *p ,int *flag)//正置判断
         {
             recursion_judge(s,p+2,flag);
         }
-        
     }
 }
-void *reverse(char *s)//注意字符串是以字符数组的形式存储的
+void reverse(char *s)//注意字符串是以字符数组的形式存储的
 {
     int len_str=0;
     char temp;
