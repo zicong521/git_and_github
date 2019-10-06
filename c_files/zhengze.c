@@ -7,14 +7,9 @@
 
 bool is_match(char *s , char *p );//判断函数
 
-// 四种情况对应的函数
-bool is_match_1(char *s,char *p);//两种符号都不存在
+bool is_match_1(char *s,char *p);// 判断子函数
 
-bool is_match_2(char *s,char *p);//只有 '.' 
-
-bool is_match_3(char *s,char *p);// 其他情况
-
-void recursion_judge(char *s, char *p ,int *flag);//针对情况三的递归判断函数
+void recursion_judge(char *s, char *p ,int *flag);// 递归判断函数
 void recursion_judge_reverse(char *s, char *p ,int *flag);//倒置递归判断函数
 
 void reverse(char *s);//字符串翻转函数 
@@ -50,46 +45,11 @@ bool is_match(char *s , char *p )
     }    
     else
     {
-        if ( strchr(p,'*')==NULL &&
-        strchr(p,'.')==NULL)
-        {
             return is_match_1(s,p);
-        }
-        if ( strchr(p,'*')==NULL &&
-        strchr(p,'.')!=NULL)
-        {
-            return is_match_2(s,p);
-        }
-        else 
-        {
-            return is_match_3(s,p);
-        }
-        
     }
 }
-bool is_match_1(char *s,char *p)//如果两种符号都不存在
-{
-    if(strcmp(s,p) == 0)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-    
-}
-bool is_match_2(char *s,char *p)//只有 '.' 存在
-{
-    while(strchr(p,'.')!= NULL)
-    {
-        char *p_index = strchr(p,'.');
-        int index=p_index-p;
-        p[index]=s[index];
-    }
-    return is_match_1(s,p);
-}
-bool is_match_3(char *s,char *p)//其他情况
+
+bool is_match_1(char *s,char *p)//其他情况
 {
     int flag1 = true,flag2 = true;
     recursion_judge(s,p,&flag1);
