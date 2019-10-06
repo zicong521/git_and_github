@@ -19,7 +19,6 @@ void recursion_judge_reverse(char *s, char *p ,int *flag);//倒置递归判断�
 
 void reverse(char *s);//字符串翻转函数 
                                
-
 int main(void)
 {
     char s[MaxCol],p[MaxCol];

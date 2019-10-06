@@ -16,11 +16,15 @@ bool is_match_1(char *s,char *p);//两种符号都不存在
 
 bool is_match_2(char *s,char *p);//只有 '.' 
 
-bool is_match_3(char *s,char *p);// 只有'*' 
+bool is_match_3(char *s,char *p);// 其他情况
 
-void recursion_judge(char *s, char *p ,int *flag);//针对情况三的递归判断函数
-
-bool is_match_4(char *s,char *p);//两种符号都存在
+void recursion_judge(char *s, char *p ,int *flag);//针对情况三的递归判断函数 
+# 对于s = sssff p=s*ssff 会出bug 
+void recursion_judge_reverse(char *s, char *p ,int *flag);//倒置递归判断函数
+# 对于 s = ssff p=ssff* 会出bug    
+#将两个函数输出结合起来 只要有一个输出为1 就判断为true 
+#实现了无bug
+void reverse(char *s);//字符串翻转函数 配合倒置递归函数使用 
 ```
 ## 测试
 ```
@@ -40,6 +44,12 @@ bool is_match_4(char *s,char *p);//两种符号都存在
 输出 0
 
 输入 s=sddd p=s*sddd
-输出 0 //bug
+输出 1
+
+输入 s=fdsa p=s*f*.*ds*s.
+输出 1
+
+
 ```
+
 
