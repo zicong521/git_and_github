@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+//空判断
 // p为空 s为空 返回1
 //p为空 s不空 返回0
 //s为空 p为 x*y* 这样的结构返回1
@@ -17,7 +18,7 @@ int main()
 }
 bool isMatch(char *s, char *p)
 {
-     int len_s = strlen(s);
+    int len_s = strlen(s);
     int len_p = strlen(p);
     if ( len_p == 0)
     {
@@ -30,15 +31,15 @@ bool isMatch(char *s, char *p)
             return false;
         }
     }
-    bool flag = (len_s != 0) && (*s == *p || *p == '.');
+    bool flag_judge = (len_s != 0) && (*s == *p || *p == '.');
 
     if (len_p >= 2 && *(p+1) == '*')
     { 
-        return isMatch(s, p+2) || (flag && isMatch(s+1, p)); //调用次数问题
+        return isMatch(s, p+2) || (flag_judge && isMatch(s+1, p)); 
     }
     else
     {
-        if(flag)
+        if(flag_judge)
         {
             return isMatch(s+1, p+1);
         }
