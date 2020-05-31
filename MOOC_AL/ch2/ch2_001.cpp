@@ -2,12 +2,25 @@
 #include <string.h>
 using namespace std;
 
-void swap(int &a, int &b)
+void swap1(char s[], int k ,int i)
 {
-    int temp = a;
-    a = b;
-    b = temp;
+    int temp = s[i];
+    for(int j = i; j > k; j--)
+    {
+        s[j] = s[j-1];
+    }
+    s[k] = temp;
 }
+void swap2(char s[], int k ,int i)
+{
+    int temp = s[k];
+    for (int j=k; j < i ; j++)
+    {
+        s[j] = s[j+1];
+    }
+    s[i] = temp;
+}
+
 void FullPermute(char s[],int k, int m)// k代表第几层 m代表从0开始的数组长度
 {
     if(k == m)
@@ -22,9 +35,9 @@ void FullPermute(char s[],int k, int m)// k代表第几层 m代表从0开始的�
     {
         for(int i = k; i <= m; i++)
         {
-            swap(s[i], s[k]); // 第i个和这层的第一个交换
+            swap1(s, k, i); // 第i个放到这一行的最前面
             FullPermute(s, k+1, m);
-            swap(s[i], s[k]); // 再交换回来 恢复为初始数组
+            swap2(s, k, i); // 再交换回来 恢复为初始数组
         }
     }
     
