@@ -2,6 +2,7 @@
     "files.associations": {
         "stdbool.h": "c",
         "setjmp.h": "c",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "stdexcept": "cpp"
     }
 }
